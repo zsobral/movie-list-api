@@ -1,0 +1,33 @@
+{
+  "name": "movie-list-api",
+  "version": "1.0.0",
+  "description": "movie list rest api",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "NODE_ENV=test MONGO_URI=mongodb://mongo/movieListTest jest --colors --watchAll --runInBand"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zsobral/movie-list-api.git"
+  },
+  "author": "Mateus Sobral Monteiro <mateus.sobral.monteiro@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zsobral/movie-list-api/issues"
+  },
+  "homepage": "https://github.com/zsobral/movie-list-api#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "joi": "^13.4.0",
+    "mongoose": "^5.1.7",
+    "nanoid": "^1.0.5",
+    "request": "^2.87.0",
+    "request-promise": "^4.2.2"
+  },
+  "devDependencies": {
+    "eslint": "^5.0.1",
+    "jest": "^23.2.0",
+    "nodemon": "^1.17.5",
+    "supertest": "^3.1.0"
+  }
+}

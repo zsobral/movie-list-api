@@ -1,0 +1,27 @@
+version: "3.1"
+
+services:
+  api:
+    image: movie-list-api:dev
+    build:
+      context: .
+      args:
+        - NODE_ENV=development
+        - PORT=$PORT
+    command: nodemon src/server.js
+    ports:
+      - "$PORT:$PORT"
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - .:/opt/app:delegated
+      - notused:/opt/app/node_modules
+
+  mongo:
+    image: mongo:4
+
+volumes:
+  notused:
