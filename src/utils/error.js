@@ -47,14 +47,14 @@ class NotFoundError extends AppError {
 class ConflictError extends AppError {
   constructor(message) {
     super(message, 409);
-    this.code = "CONFLICT_ERR";
+    this.code = 'CONFLICT_ERR';
   }
 }
 
 class UnauthorizedError extends AppError {
   constructor(message) {
     super(message, 401);
-    this.code = "UNAUTHORIZED_ERR";
+    this.code = 'UNAUTHORIZED_ERR';
   }
 }
 
@@ -65,7 +65,7 @@ function handleError(err, res) {
     return res.status(err.status).json(err.toObject());
   }
 
-  res.status(500).json({ error: { code: "ERR", message: "error" } });
+  res.status(500).json({ error: { code: 'ERR', message: 'error' } });
 }
 
 module.exports = {

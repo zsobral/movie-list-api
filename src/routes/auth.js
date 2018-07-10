@@ -25,11 +25,11 @@ router.post('/auth/email',
       });
 
       if(!user) {
-        throw new error.UnauthorizedError("invalid email");
+        throw new error.UnauthorizedError('invalid email');
       }
 
       if(user.password !== req.validator.body.password) {
-        throw new error.UnauthorizedError("invalid password");
+        throw new error.UnauthorizedError('invalid password');
       }
 
       const now = Math.floor(Date.now() / 1000);

@@ -16,7 +16,7 @@ app.use(express.json());
 app.use('/api', routes);
 
 app.use('*', (req, res, next) => {
-  next(new error.NotFoundError("api endpoint not found"));
+  next(new error.NotFoundError('api endpoint not found'));
 });
 
 app.use((err, req, res, next) => {

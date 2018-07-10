@@ -50,7 +50,7 @@ router.post('/users',
   }),
   async (req, res, next) => {
     try {
-      let user = await User.findOne({ email: req.validator.body.email });
+      const user = await User.findOne({ email: req.validator.body.email });
       if (user) {
         throw new error.ConflictError('email already exists');
       }
@@ -61,18 +61,7 @@ router.post('/users',
         password: req.validator.body.password
       });
       await newUser.save();
-      res
-        .status(201)
-        .json(newUser.toObject({
-          transform: (doc, ret) => {
-            return {
-              _id: ret._id,
-              name: ret.name,
-              email: ret.email,
-              created_at: ret.created_at
-            };
-          }
-        }));
+      res.status(201).json(newUser.toJSON());
     } catch (error) {
       next(error);
     }
@@ -112,7 +101,7 @@ router.put('/users/:id',
       if (req.validator.body.email) {
         const user = await User.findOne({ email: req.validator.body.email });
         if (user) {
-          throw new error.ConflictError("email already exists");
+          throw new error.ConflictError('email already exists');
         }
       }
 

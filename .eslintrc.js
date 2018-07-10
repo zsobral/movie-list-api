@@ -10,6 +10,13 @@ module.exports = {
     ecmaVersion: 2018
   },
   rules: {
-    'semi': ['error', 'always']
+    'strict': ['error', 'global'],
+    'semi': ['error', 'always'],
+    'semi-style': ['error', 'last'],
+    'indent': ['error', 2],
+    'quotes': ['error', 'single'],
+    'comma-dangle': ['error', 'never'],
+    'no-var': 'error',
+    'prefer-const': 'error'
   }
 };

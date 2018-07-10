@@ -7,7 +7,7 @@ const dbConnected = require('../middlewares/db-connected');
 const authRouter = require('./auth');
 const userRouter = require('./user');
 const meRouter = require('./me');
-const theMovieDbRouter = require('./the-movie-db');
+const tmdbRouter = require('./tmdb');
 
 const router = express.Router();
 
@@ -15,6 +15,6 @@ router.use(dbConnected);
 router.use(authRouter);
 router.use(userRouter);
 router.use(meRouter);
-router.use(theMovieDbRouter);
+router.use(tmdbRouter);
 
 module.exports = router;

@@ -7,9 +7,9 @@ const app = require('../src/app');
 const User = require('../src/models/user');
 
 const user = {
-  name: "mateus",
-  email: "mateus@gmail.com",
-  password: "123456"
+  name: 'mateus',
+  email: 'mateus@gmail.com',
+  password: '123456'
 };
 
 beforeAll(async () => {
