@@ -27,7 +27,8 @@ module.exports = async (req, res, next) => {
       throw new error.UnauthorizedError('expired token');
     };
 
-    req.user = token.user;
+    req.token = token.id;
+    req.user = token.user.toJSON();
     next();
   } catch (error) {
     next(error);

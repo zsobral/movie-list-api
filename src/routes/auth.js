@@ -24,11 +24,11 @@ router.post('/auth/email',
         email: req.validator.body.email
       });
 
-      if(!user) {
+      if (!user) {
         throw new error.UnauthorizedError('invalid email');
       }
 
-      if(user.password !== req.validator.body.password) {
+      if (user.password !== req.validator.body.password) {
         throw new error.UnauthorizedError('invalid password');
       }
 
@@ -50,9 +50,5 @@ router.post('/auth/email',
     }
   }
 );
-
-router.get('/logout', (req, res, next) => {
-
-});
 
 module.exports = router;

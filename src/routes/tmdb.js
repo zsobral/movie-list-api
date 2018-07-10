@@ -8,7 +8,7 @@ const validator = require('../middlewares/validator');
 
 const router = express.Router();
 
-router.get('/tmdb/search',
+router.get('/tmdb/movie',
   validator({
     query: {
       query: joi.string().trim().min(1).required()
@@ -34,7 +34,7 @@ router.get('/tmdb/movie/:id',
     try {
       const movie = await theMovieDb.findMovieById(req.validator.params.id);
 
-      if(!movie) {
+      if (!movie) {
         throw new Error('movie not found');
       }
 

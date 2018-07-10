@@ -8,6 +8,8 @@ const tmdbRequest = request.defaults({
   baseUrl: 'https://api.themoviedb.org/3'
 });
 
+// TODO handle rate limit
+
 exports.find = async (query) => {
   try {
     const qs = {
@@ -18,19 +20,20 @@ exports.find = async (query) => {
     const movies = await tmdbRequest.get('/search/movie', { qs, json: true });
     return movies.results;
   } catch (error) {
-    return error;
+    throw error;
   }
 };
 
 exports.findMovieById = async (id) => {
   try {
     const qs = {
-      api_key: API_KEY
+      api_key: API_KEY,
+      append_to_response: 'videos,images'
     };
     const movie = await tmdbRequest.get(`/movie/${id}`, { qs, json: true });
     return movie;
   } catch (error) {
     // if(error.status_code === 429) // rate limit
-    return error;
+    throw error;
   }
 };
