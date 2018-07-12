@@ -15,7 +15,7 @@ router.post('/movie-list',
   validator({
     body: {
       title: joi.string().trim().optional(),
-      movies: joi.array().items(joi.number()).required().options({ stripUnknown: false }).min(1)
+      movies: joi.array().items(joi.number()).required().min(1).options({ stripUnknown: false })
     }
   }),
   async (req, res, next) => {

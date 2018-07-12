@@ -5,18 +5,18 @@ const mongoose = require('mongoose');
 
 const dbConnected = require('../middlewares/db-connected');
 const authRouter = require('./auth');
-const userRouter = require('./user');
-const meRouter = require('./me');
+const logoutRouter = require('./logout');
+const usersRouter = require('./users');
 const tmdbRouter = require('./tmdb');
-const movieListRouter = require('./movie-list');
+const movieListsRouter = require('./movie-lists');
 
 const router = express.Router();
 
 router.use(dbConnected);
 router.use(authRouter);
-router.use(userRouter);
-router.use(meRouter);
+router.use(logoutRouter);
+router.use(usersRouter);
 router.use(tmdbRouter);
-router.use(movieListRouter);
+router.use(movieListsRouter);
 
 module.exports = router;

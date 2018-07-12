@@ -21,6 +21,13 @@ router.get('/users',
   }
 );
 
+router.get('/users/me',
+  requireAuthentication,
+  (req, res, next) => {
+    res.json(req.user);
+  }
+);
+
 router.get('/users/:id',
   validator({
     params: {
@@ -68,52 +75,52 @@ router.post('/users',
   }
 );
 
-router.delete('/users/:id',
-  validator({
-    params: {
-      id: joi.string().regex(/^[0-9A-F]{24}$/i).required()
-    }
-  }),
-  async (req, res, next) => {
-    try {
-      await User.findByIdAndRemove(req.validator.params.id);
-      res.json();
-    } catch (error) {
-      next(error);
-    }
-  }
-);
+// router.delete('/users/:id',
+//   validator({
+//     params: {
+//       id: joi.string().regex(/^[0-9A-F]{24}$/i).required()
+//     }
+//   }),
+//   async (req, res, next) => {
+//     try {
+//       await User.findByIdAndRemove(req.validator.params.id);
+//       res.json();
+//     } catch (error) {
+//       next(error);
+//     }
+//   }
+// );
 
-router.put('/users/:id',
-  validator({
-    params: {
-      id: joi.string().regex(/^[0-9A-F]{24}$/i).required()
-    },
-    body: {
-      name: joi.string().trim().min(3),
-      email: joi.string().trim().email(),
-      password: joi.string().min(6),
-      avatar: joi.string()
-    }
-  }),
-  async (req, res, next) => {
-    try {
-      if (req.validator.body.email) {
-        const user = await User.findOne({ email: req.validator.body.email });
-        if (user) {
-          throw new error.ConflictError('email already exists');
-        }
-      }
+// router.put('/users/:id',
+//   validator({
+//     params: {
+//       id: joi.string().regex(/^[0-9A-F]{24}$/i).required()
+//     },
+//     body: {
+//       name: joi.string().trim().min(3),
+//       email: joi.string().trim().email(),
+//       password: joi.string().min(6),
+//       avatar: joi.string()
+//     }
+//   }),
+//   async (req, res, next) => {
+//     try {
+//       if (req.validator.body.email) {
+//         const user = await User.findOne({ email: req.validator.body.email });
+//         if (user) {
+//           throw new error.ConflictError('email already exists');
+//         }
+//       }
 
-      await User.findByIdAndUpdate(req.validator.params.id, {
-        ...req.validator.body,
-        updated_at: Math.floor(Date.now() / 1000)
-      });
-      res.json();
-    } catch (error) {
-      next(error);
-    }
-  }
-);
+//       await User.findByIdAndUpdate(req.validator.params.id, {
+//         ...req.validator.body,
+//         updated_at: Math.floor(Date.now() / 1000)
+//       });
+//       res.json();
+//     } catch (error) {
+//       next(error);
+//     }
+//   }
+// );
 
 module.exports = router;
