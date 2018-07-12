@@ -1,10 +1,7 @@
 FROM node:10-alpine
 
 ARG NODE_ENV=production
-ARG PORT=3000
-
 ENV NODE_ENV $NODE_ENV
-ENV PORT $PORT
 
 WORKDIR /opt
 
@@ -15,6 +12,6 @@ ENV PATH /opt/node_modules/.bin:$PATH
 WORKDIR /opt/app
 COPY . .
 
-EXPOSE $PORT
+EXPOSE 3000
 
 CMD ["node", "src/server.js"]

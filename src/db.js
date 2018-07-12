@@ -10,6 +10,10 @@ mongoose.connection.on('error', async (err) => {
   await connect();
 });
 
+mongoose.connection.once('open', () => {
+  console.log('mongo connected');
+});
+
 async function connect () {
   try {
     await mongoose.connect(process.env.MONGO_URI, {
