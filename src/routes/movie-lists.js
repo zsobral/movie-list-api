@@ -10,7 +10,7 @@ const MovieList = require('../models/movie-list');
 
 const router = express.Router();
 
-router.post('/movie-list',
+router.post('/movie-lists',
   requireAuthentication,
   validator({
     body: {
@@ -30,7 +30,14 @@ router.post('/movie-list',
           title: movie.title,
           overview: movie.overview,
           poster: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
-          videos: movie.videos,
+          videos: movie.videos.results
+            .filter(video => video.site === 'YouTube')
+            .map(video => {
+              return {
+                name: video.name,
+                url: `http://www.youtube.com/embed/${video.key}`
+              };
+            }),
           genres: movie.genres.map(genre => genre.name),
           release_date: Math.floor(new Date(movie.release_date) / 1000)
         });
@@ -52,7 +59,7 @@ router.post('/movie-list',
   }
 );
 
-router.get('/movie-list',
+router.get('/movie-lists',
   async (req, res, next) => {
     try {
       const movieLists = await MovieList.find();
@@ -63,7 +70,7 @@ router.get('/movie-list',
   }
 );
 
-router.get('/movie-list/me',
+router.get('/movie-lists/me',
   requireAuthentication,
   async (req, res, next) => {
     try {
