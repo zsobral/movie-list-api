@@ -31,11 +31,11 @@ router.post('/movie-lists',
           overview: movie.overview,
           poster: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
           videos: movie.videos.results
-            .filter(video => video.site === 'YouTube')
+            .filter(video => video.site === 'YouTube' && video.type === 'Trailer')
             .map(video => {
               return {
-                name: video.name,
-                url: `http://www.youtube.com/embed/${video.key}`
+                id: video.key,
+                name: video.name
               };
             }),
           genres: movie.genres.map(genre => genre.name),
