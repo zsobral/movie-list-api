@@ -6,18 +6,10 @@ const Schema = mongoose.Schema;
 
 const movieListSchema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: 'User' },
-  title: { type: String },
-  movies: [{
-    tmdb_id: { type: Number },
-    title: { type: String, required: true },
-    overview: { type: String, required: true },
-    poster: { type: String },
-    videos: [],
-    genres: [String],
-    release_date: { type: Number }
-  }],
+  title: String,
+  movies: [{ type: Schema.Types.ObjectId, ref: 'Movie' }],
   created_at: { type: Number, default: () => Math.floor(Date.now() / 1000) },
-  updated_at: { type: Number }
+  updated_at: Number
 });
 
 movieListSchema.set('toJSON', {
