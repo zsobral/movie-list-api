@@ -17,6 +17,7 @@ module.exports = {
     'quotes': ['error', 'single'],
     'comma-dangle': ['error', 'never'],
     'no-var': 'error',
-    'prefer-const': 'error'
+    'prefer-const': 'error',
+    'keyword-spacing': ['error']
   }
 };

@@ -8,7 +8,7 @@ module.exports = async (req, res, next) => {
   try {
     const authHeader = req.get('Authorization');
 
-    if(!authHeader) {
+    if (!authHeader) {
       throw new error.UnauthorizedError('missing Authorization header');
     }
 
@@ -23,7 +23,7 @@ module.exports = async (req, res, next) => {
     }
 
     const now = Math.floor(Date.now() / 1000);
-    if(token.expires_at < now) {
+    if (token.expires_at < now) {
       throw new error.UnauthorizedError('expired token');
     };
 
