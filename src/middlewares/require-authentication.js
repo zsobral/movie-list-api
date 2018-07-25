@@ -6,17 +6,17 @@ const error = require('../utils/error');
 
 module.exports = async (req, res, next) => {
   try {
-    const authHeader = req.get('Authorization');
+    const cookieToken = req.cookies.sid;
 
-    if (!authHeader) {
+    if (!cookieToken) {
       throw new error.UnauthorizedError('missing Authorization header');
     }
 
-    if (!authHeader.match(/^Bearer\ [A-Za-z0-9_~]{64}$/)) {
+    if (!cookieToken.match(/^[A-Za-z0-9_~]{64}$/)) {
       return next(new error.UnauthorizedError('invalid token format'));
     }
 
-    const token = await Token.findById(authHeader.split(' ')[1]).populate('user');
+    const token = await Token.findById(cookieToken).populate('user');
 
     if (!token) {
       throw new error.UnauthorizedError('invalid token');

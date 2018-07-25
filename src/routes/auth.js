@@ -42,9 +42,14 @@ router.post('/auth/email',
       });
       await token.save();
 
-      res.json({
-        token: token.id
-      });
+      res
+        .cookie('sid', token.id, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'development' ? false : true
+        })
+        .json({
+          token: token.id
+        });
     } catch (error) {
       next(error);
     }

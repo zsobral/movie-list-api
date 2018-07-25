@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express');
+const cookieParser = require('cookie-parser');
 
 const routes = require('./routes');
 const error = require('./utils/error');
@@ -12,6 +13,7 @@ if (process.env.NODE_ENV === 'test') {
 }
 
 app.disable('x-powered-by');
+app.use(cookieParser());
 app.use(express.json());
 app.use('/api', routes);
 
