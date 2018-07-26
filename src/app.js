@@ -13,7 +13,7 @@ if (process.env.NODE_ENV === 'test') {
 }
 
 app.disable('x-powered-by');
-app.use(cookieParser());
+app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.json());
 app.use('/api', routes);
 

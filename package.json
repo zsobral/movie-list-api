@@ -4,7 +4,7 @@
   "description": "movie list rest api",
   "scripts": {
     "start": "node src/server.js",
-    "lint": "eslint --fix src/* test/*",
+    "lint": "eslint --fix src/** test/**",
     "test": "NODE_ENV=test MONGO_URI=mongodb://mongo/movieListTest jest --colors --watchAll --runInBand"
   },
   "repository": {
@@ -27,6 +27,7 @@
     "request-promise": "^4.2.2"
   },
   "devDependencies": {
+    "cookie": "^0.3.1",
     "eslint": "^5.0.1",
     "jest": "^23.2.0",
     "nodemon": "^1.17.5",

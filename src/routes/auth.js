@@ -41,10 +41,12 @@ router.post('/auth/email',
         expires_at: expire
       });
       await token.save();
-
       res
-        .cookie('sid', token.id, {
+        .cookie('token', token.id, {
           httpOnly: true,
+          signed: true,
+          expires: new Date(expire * 1000),
+          sameSite: process.env.NODE_ENV === 'development' ? false : true,
           secure: process.env.NODE_ENV === 'development' ? false : true
         })
         .json({

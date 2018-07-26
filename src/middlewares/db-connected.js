@@ -1,7 +1,6 @@
 'use strict';
 
 const db = require('../db');
-const error = require('../utils/error');
 
 module.exports = (req, res, next) => {
   const dbState = db.connection.readyState;

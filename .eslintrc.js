@@ -18,6 +18,9 @@ module.exports = {
     'comma-dangle': ['error', 'never'],
     'no-var': 'error',
     'prefer-const': 'error',
-    'keyword-spacing': ['error']
+    'keyword-spacing': ['error'],
+    'no-trailing-spaces': 'error',
+    'eol-last': ['error', 'always'],
+    'linebreak-style': ['error', 'unix']
   }
 };

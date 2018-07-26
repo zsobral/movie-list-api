@@ -6,7 +6,7 @@ const error = require('../utils/error');
 
 module.exports = async (req, res, next) => {
   try {
-    const cookieToken = req.cookies.sid;
+    const cookieToken = req.signedCookies.token;
 
     if (!cookieToken) {
       throw new error.UnauthorizedError('missing Authorization header');

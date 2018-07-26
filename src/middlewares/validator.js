@@ -19,7 +19,7 @@ module.exports = (schema) => {
       return next(new error.ValidationError('validation error', result.error.details));
     }
 
-    req.validator =  result.value;
+    req.validator = result.value;
     next();
   };
 };
