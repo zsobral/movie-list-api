@@ -9,11 +9,7 @@ module.exports = async (req, res, next) => {
     const cookieToken = req.signedCookies.token;
 
     if (!cookieToken) {
-      throw new error.UnauthorizedError('missing Authorization header');
-    }
-
-    if (!cookieToken.match(/^[A-Za-z0-9_~]{64}$/)) {
-      return next(new error.UnauthorizedError('invalid token format'));
+      throw new error.UnauthorizedError('missing token cookie');
     }
 
     const token = await Token.findById(cookieToken).populate('user');

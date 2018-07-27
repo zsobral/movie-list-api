@@ -9,7 +9,7 @@ const validator = require('../middlewares/validator');
 
 const router = express.Router();
 
-router.get('/tmdb/movie',
+router.get('/tmdb/movies',
   requireAuthentication,
   validator({
     query: {
@@ -26,7 +26,7 @@ router.get('/tmdb/movie',
   }
 );
 
-router.get('/tmdb/movie/:id',
+router.get('/tmdb/movies/:id',
   requireAuthentication,
   validator({
     params: {
