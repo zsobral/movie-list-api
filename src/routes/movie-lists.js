@@ -36,24 +36,12 @@ router.post('/movie-lists',
             )
             .map(trailer => ({ key: trailer.key, name: trailer.name }));
 
-          const poster = {
-            small: `https://image.tmdb.org/t/p/w185${movie.poster_path}`,
-            medium: `https://image.tmdb.org/t/p/w342${movie.poster_path}`,
-            large: `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-          };
-
-          const backdrop = {
-            small: `https://image.tmdb.org/t/p/w300${movie.backdrop_path}`,
-            medium: `https://image.tmdb.org/t/p/w780${movie.backdrop_path}`,
-            large: `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`
-          };
-
           movie = new Movie({
             tmdb_id: movie.id,
             title: movie.title,
             overview: movie.overview,
-            poster,
-            backdrop,
+            poster: movie.poster,
+            backdrop: movie.backdrop,
             trailers,
             genres: movie.genres.map(genre => genre.name),
             release_date: Math.floor(new Date(movie.release_date) / 1000)
@@ -92,6 +80,7 @@ router.get('/movie-lists',
   }
 );
 
+
 router.get('/movie-lists/me',
   requireAuthentication,
   async (req, res, next) => {
@@ -104,5 +93,17 @@ router.get('/movie-lists/me',
   }
 );
 
+router.get('/movie-lists/:id',
+  async (req, res, next) => {
+    try {
+      const movieList = await MovieList
+        .findById(req.params.id)
+        .populate('movies');
+      res.json(movieList);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 module.exports = router;

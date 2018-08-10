@@ -17,8 +17,21 @@ exports.find = async (query) => {
       query,
       include_adult: false
     };
-    const movies = await tmdbRequest.get('/search/movie', { qs, json: true });
-    return movies.results;
+    const { results: movies } = await tmdbRequest.get('/search/movie', { qs, json: true });
+    for (const movie of movies) {
+      movie.poster = {
+        small: `https://image.tmdb.org/t/p/w185${movie.poster_path}`,
+        medium: `https://image.tmdb.org/t/p/w342${movie.poster_path}`,
+        large: `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+      };
+
+      movie.backdrop = {
+        small: `https://image.tmdb.org/t/p/w300${movie.backdrop_path}`,
+        medium: `https://image.tmdb.org/t/p/w780${movie.backdrop_path}`,
+        large: `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`
+      };
+    }
+    return movies;
   } catch (error) {
     throw error;
   }
@@ -31,6 +44,16 @@ exports.findMovieById = async (id) => {
       append_to_response: 'videos,images'
     };
     const movie = await tmdbRequest.get(`/movie/${id}`, { qs, json: true });
+    movie.poster = {
+      small: `https://image.tmdb.org/t/p/w185${movie.poster_path}`,
+      medium: `https://image.tmdb.org/t/p/w342${movie.poster_path}`,
+      large: `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+    };
+    movie.backdrop = {
+      small: `https://image.tmdb.org/t/p/w300${movie.backdrop_path}`,
+      medium: `https://image.tmdb.org/t/p/w780${movie.backdrop_path}`,
+      large: `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`
+    };
     return movie;
   } catch (error) {
     // if(error.status_code === 429) // rate limit
