@@ -59,12 +59,11 @@ class UnauthorizedError extends AppError {
 }
 
 function handleError(err, res) {
-  console.log(err);
-
   if (err instanceof AppError) {
     return res.status(err.status).json(err.toObject());
   }
 
+  console.log(err);
   res.status(500).json({ error: { code: 'ERR', message: 'error' } });
 }
 
