@@ -2,6 +2,7 @@
 
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const morgan = require('morgan');
 
 const routes = require('./routes');
 const error = require('./utils/error');
@@ -13,6 +14,15 @@ if (process.env.NODE_ENV === 'test') {
 }
 
 app.disable('x-powered-by');
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(morgan('short'));
+}
+
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
+
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.json());
 app.use('/api', routes);
