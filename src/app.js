@@ -2,7 +2,6 @@
 
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const morgan = require('morgan');
 
 const routes = require('./routes');
 const error = require('./utils/error');
@@ -15,11 +14,18 @@ if (process.env.NODE_ENV === 'test') {
 
 app.disable('x-powered-by');
 
+if (process.env.CORS) {
+  const cors = require('cors');
+  app.use(cors());
+}
+
 if (process.env.NODE_ENV === 'production') {
+  const morgan = require('morgan');
   app.use(morgan('short'));
 }
 
 if (process.env.NODE_ENV === 'development') {
+  const morgan = require('morgan');
   app.use(morgan('dev'));
 }
 
