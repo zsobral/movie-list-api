@@ -72,7 +72,9 @@ router.post('/movie-lists',
 router.get('/movie-lists',
   async (req, res, next) => {
     try {
-      const movieLists = await MovieList.find().populate(['movies', 'user']);
+      const movieLists = await MovieList
+        .find()
+        .populate(['movies', 'user']);
       res.json(movieLists);
     } catch (error) {
       next(error);
@@ -85,7 +87,9 @@ router.get('/movie-lists/me',
   requireAuthentication,
   async (req, res, next) => {
     try {
-      const movieLists = await MovieList.find({ user: req.user.id }).populate('movies');
+      const movieLists = await MovieList
+        .find({ user: req.user.id })
+        .populate('movies');
       res.json(movieLists);
     } catch (error) {
       next(error);
