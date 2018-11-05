@@ -72,7 +72,7 @@ router.post('/movie-lists',
 router.get('/movie-lists',
   async (req, res, next) => {
     try {
-      const movieLists = await MovieList.find();
+      const movieLists = await MovieList.find().populate(['movies', 'user']);
       res.json(movieLists);
     } catch (error) {
       next(error);
