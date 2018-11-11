@@ -8,16 +8,22 @@ const movieSchema = new Schema({
   tmdb_id: { type: Number, required: true, index: true },
   title: { type: String, required: true },
   overview: { type: String, required: true },
-  poster: new Schema({
-    small: { type: String, required: true },
-    medium: { type: String, required: true },
-    large: { type: String, required: true }
-  }, { _id: false }),
-  backdrop: new Schema({
-    small: { type: String, required: true },
-    medium: { type: String, required: true },
-    large: { type: String, required: true }
-  }, { _id: false }),
+  poster: new Schema(
+    {
+      small: { type: String, required: true },
+      medium: { type: String, required: true },
+      large: { type: String, required: true }
+    },
+    { _id: false }
+  ),
+  backdrop: new Schema(
+    {
+      small: { type: String, required: true },
+      medium: { type: String, required: true },
+      large: { type: String, required: true }
+    },
+    { _id: false }
+  ),
   trailers: [],
   genres: [String],
   release_date: { type: Number },

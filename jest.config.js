@@ -2,8 +2,6 @@
 
 module.exports = {
   collectCoverage: true,
-  collectCoverageFrom: [
-    'src/**/*.js'
-  ],
+  collectCoverageFrom: ['src/**/*.js'],
   coverageReporters: ['text']
 };

@@ -11,12 +11,21 @@ const MovieList = require('../models/movie-list');
 
 const router = express.Router();
 
-router.post('/movie-lists',
+router.post(
+  '/movie-lists',
   requireAuthentication,
   validator({
     body: {
-      title: joi.string().trim().optional(),
-      movies: joi.array().items(joi.number()).required().min(1).options({ stripUnknown: false })
+      title: joi
+        .string()
+        .trim()
+        .optional(),
+      movies: joi
+        .array()
+        .items(joi.number())
+        .required()
+        .min(1)
+        .options({ stripUnknown: false })
     }
   }),
   async (req, res, next) => {
@@ -24,15 +33,14 @@ router.post('/movie-lists',
       const movies = [];
 
       for (const movieId of req.validator.body.movies) {
-
         let movie = await Movie.findOne({ tmdb_id: movieId });
 
         if (!movie) {
           movie = await theMovieDb.findMovieById(movieId);
 
           const trailers = movie.videos.results
-            .filter(video =>
-              video.site === 'YouTube' && video.type === 'Trailer'
+            .filter(
+              video => video.site === 'YouTube' && video.type === 'Trailer'
             )
             .map(trailer => ({ key: trailer.key, name: trailer.name }));
 
@@ -69,45 +77,35 @@ router.post('/movie-lists',
   }
 );
 
-router.get('/movie-lists',
-  async (req, res, next) => {
-    try {
-      const movieLists = await MovieList
-        .find()
-        .populate(['movies', 'user']);
-      res.json(movieLists);
-    } catch (error) {
-      next(error);
-    }
+router.get('/movie-lists', async (req, res, next) => {
+  try {
+    const movieLists = await MovieList.find().populate(['movies', 'user']);
+    res.json(movieLists);
+  } catch (error) {
+    next(error);
   }
-);
+});
 
-
-router.get('/movie-lists/me',
-  requireAuthentication,
-  async (req, res, next) => {
-    try {
-      const movieLists = await MovieList
-        .find({ user: req.user.id })
-        .populate('movies');
-      res.json(movieLists);
-    } catch (error) {
-      next(error);
-    }
+router.get('/movie-lists/me', requireAuthentication, async (req, res, next) => {
+  try {
+    const movieLists = await MovieList.find({ user: req.user.id }).populate(
+      'movies'
+    );
+    res.json(movieLists);
+  } catch (error) {
+    next(error);
   }
-);
+});
 
-router.get('/movie-lists/:id',
-  async (req, res, next) => {
-    try {
-      const movieList = await MovieList
-        .findById(req.params.id)
-        .populate('movies');
-      res.json(movieList);
-    } catch (error) {
-      next(error);
-    }
+router.get('/movie-lists/:id', async (req, res, next) => {
+  try {
+    const movieList = await MovieList.findById(req.params.id).populate(
+      'movies'
+    );
+    res.json(movieList);
+  } catch (error) {
+    next(error);
   }
-);
+});
 
 module.exports = router;

@@ -11,11 +11,19 @@ const error = require('../utils/error');
 const User = require('../models/user');
 const Token = require('../models/token');
 
-router.post('/auth/email',
+router.post(
+  '/auth/email',
   validator({
     body: {
-      email: joi.string().trim().email().required(),
-      password: joi.string().min(6).required()
+      email: joi
+        .string()
+        .trim()
+        .email()
+        .required(),
+      password: joi
+        .string()
+        .min(6)
+        .required()
     }
   }),
   async (req, res, next) => {
@@ -33,7 +41,7 @@ router.post('/auth/email',
       }
 
       const now = Math.floor(Date.now() / 1000);
-      const expire = now + (86400 * 30 * 6); // 6 months
+      const expire = now + 86400 * 30 * 6; // 6 months
       const tokenId = nanoid(64);
       const token = new Token({
         _id: tokenId,

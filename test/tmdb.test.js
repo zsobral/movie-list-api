@@ -20,7 +20,7 @@ beforeAll(async () => {
   user.id = newUser.id;
   const response = await request(app)
     .post('/api/auth/email')
-    .send({ email: user.email, password: user.password});
+    .send({ email: user.email, password: user.password });
   cookies = response.header['set-cookie'];
 });
 
@@ -60,11 +60,9 @@ describe('GET /tmdb/movies', () => {
 });
 
 describe('GET /tmdb/movies/:id', () => {
-
   describe('missing token cookie', async () => {
     it('should response with unauthorized error', async () => {
-      const response = await request(app)
-        .get('/api/tmdb/movies/808');
+      const response = await request(app).get('/api/tmdb/movies/808');
       expect(response.body.error.code).toBe('UNAUTHORIZED_ERR');
     });
   });

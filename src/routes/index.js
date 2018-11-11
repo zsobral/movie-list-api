@@ -19,7 +19,7 @@ router.use(tmdbRouter);
 router.use(movieListsRouter);
 
 router.use('/healthz', (req, res) => {
-  res.send('I\'m okay!');
+  res.send("I'm okay!");
 });
 
 module.exports = router;

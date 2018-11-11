@@ -40,7 +40,10 @@ describe('POST /auth/email', () => {
         /[^(token=)][^;]*/.exec(response.header['set-cookie'][0])[0]
       );
       cookies = response.header['set-cookie'];
-      const signedResult = cookieParser.signedCookie(parsedCookie, process.env.COOKIE_SECRET);
+      const signedResult = cookieParser.signedCookie(
+        parsedCookie,
+        process.env.COOKIE_SECRET
+      );
       expect(signedResult).toBe((await Token.findOne()).id);
       expect(response.status).toBe(200);
     });
@@ -62,8 +65,7 @@ describe('POST /auth/email', () => {
 
   describe('empty body', () => {
     it('should response with validation error', async () => {
-      const response = await request(app)
-        .post('/api/auth/email');
+      const response = await request(app).post('/api/auth/email');
 
       expect(response.body.error.code).toBe('VALIDATION_ERR');
       expect(response.status).toBe(400);

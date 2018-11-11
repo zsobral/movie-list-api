@@ -4,8 +4,9 @@
   "description": "movie list rest api",
   "scripts": {
     "start": "node src/server.js",
-    "lint": "eslint --fix src/** test/**",
-    "test": "NODE_ENV=test MONGO_URI=mongodb://mongo/movieListTest jest --colors --watchAll --runInBand"
+    "lint": "eslint --fix \"**/*.js\"",
+    "test": "NODE_ENV=test MONGO_URI=mongodb://mongo/movieListTest jest --colors --watchAll --runInBand",
+    "prettier": "prettier --write \"**/*.js\""
   },
   "repository": {
     "type": "git",
@@ -31,8 +32,23 @@
   "devDependencies": {
     "cookie": "^0.3.1",
     "eslint": "^5.8.0",
+    "husky": "^1.1.3",
     "jest": "^23.6.0",
+    "lint-staged": "^8.0.4",
     "nodemon": "^1.18.5",
+    "prettier": "^1.15.2",
     "supertest": "^3.3.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js}": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
   }
 }

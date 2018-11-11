@@ -19,12 +19,12 @@ if (process.env.CORS) {
   app.use(cors());
 }
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production' && process.env.MORGAN) {
   const morgan = require('morgan');
   app.use(morgan('short'));
 }
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development' && process.env.MORGAN) {
   const morgan = require('morgan');
   app.use(morgan('dev'));
 }

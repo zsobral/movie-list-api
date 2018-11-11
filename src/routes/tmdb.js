@@ -9,11 +9,16 @@ const validator = require('../middlewares/validator');
 
 const router = express.Router();
 
-router.get('/tmdb/movies',
+router.get(
+  '/tmdb/movies',
   requireAuthentication,
   validator({
     query: {
-      query: joi.string().trim().min(1).required()
+      query: joi
+        .string()
+        .trim()
+        .min(1)
+        .required()
     }
   }),
   async (req, res, next) => {
@@ -26,11 +31,16 @@ router.get('/tmdb/movies',
   }
 );
 
-router.get('/tmdb/movies/:id',
+router.get(
+  '/tmdb/movies/:id',
   requireAuthentication,
   validator({
     params: {
-      id: joi.number().integer().positive().required()
+      id: joi
+        .number()
+        .integer()
+        .positive()
+        .required()
     }
   }),
   async (req, res, next) => {

@@ -10,28 +10,27 @@ const User = require('../models/user');
 
 const router = express.Router();
 
-router.get('/users',
-  async (req, res, next) => {
-    try {
-      const users = await User.find({});
-      res.json(users);
-    } catch (error) {
-      next(error);
-    }
+router.get('/users', async (req, res, next) => {
+  try {
+    const users = await User.find({});
+    res.json(users);
+  } catch (error) {
+    next(error);
   }
-);
+});
 
-router.get('/users/me',
-  requireAuthentication,
-  (req, res, next) => {
-    res.json(req.user);
-  }
-);
+router.get('/users/me', requireAuthentication, (req, res, next) => {
+  res.json(req.user);
+});
 
-router.get('/users/:id',
+router.get(
+  '/users/:id',
   validator({
     params: {
-      id: joi.string().regex(/^[0-9A-F]{24}$/i).required()
+      id: joi
+        .string()
+        .regex(/^[0-9A-F]{24}$/i)
+        .required()
     }
   }),
   async (req, res, next) => {
@@ -47,12 +46,24 @@ router.get('/users/:id',
   }
 );
 
-router.post('/users',
+router.post(
+  '/users',
   validator({
     body: {
-      name: joi.string().trim().min(3).required(),
-      email: joi.string().trim().email().required(),
-      password: joi.string().min(6).required()
+      name: joi
+        .string()
+        .trim()
+        .min(3)
+        .required(),
+      email: joi
+        .string()
+        .trim()
+        .email()
+        .required(),
+      password: joi
+        .string()
+        .min(6)
+        .required()
     }
   }),
   async (req, res, next) => {

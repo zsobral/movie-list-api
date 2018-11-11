@@ -4,7 +4,7 @@ const joi = require('joi');
 
 const error = require('../utils/error');
 
-module.exports = (schema) => {
+module.exports = schema => {
   return (req, res, next) => {
     const value = {
       params: req.params,
@@ -16,7 +16,9 @@ module.exports = (schema) => {
       stripUnknown: true
     });
     if (result.error) {
-      return next(new error.ValidationError('validation error', result.error.details));
+      return next(
+        new error.ValidationError('validation error', result.error.details)
+      );
     }
 
     req.validator = result.value;

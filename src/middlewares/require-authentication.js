@@ -21,7 +21,7 @@ module.exports = async (req, res, next) => {
     const now = Math.floor(Date.now() / 1000);
     if (token.expires_at < now) {
       throw new error.UnauthorizedError('expired token');
-    };
+    }
 
     req.token = token.id;
     req.user = token.user.toJSON();
