@@ -3,7 +3,6 @@ jobs:
   build:
     docker:
       - image: circleci/node:10
-      - image: mongo:4
     steps:
       - checkout
       - run:
@@ -22,7 +21,9 @@ jobs:
   test:
     docker:
       - image: circleci/node:10
-      - image: mongo:4
+      - image: circleci/mongo:4
+    environment:
+      MONGO_URI=mongodb://localhost:27017/movieList
     steps:
       - checkout
       - run:
