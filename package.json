@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node src/server.js",
     "lint": "eslint --fix \"**/*.js\"",
-    "test": "jest --colors --watchAll --runInBand",
+    "test": "jest --colors --runInBand",
     "prettier": "prettier --write \"**/*.js\""
   },
   "repository": {
