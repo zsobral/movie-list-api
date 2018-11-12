@@ -10,17 +10,14 @@ describe('database disconnected', () => {
     await request(app)
       .get('/api/users')
       .expect(500);
-  });
+  }, 30000);
 });
 
 describe('database connected', () => {
-  beforeAll(async () => {
-    await db.connect();
-  });
-
   it('should response with status 200', async () => {
+    await db.connect();
     await request(app)
       .get('/api/users')
       .expect(200);
-  });
+  }, 30000);
 });

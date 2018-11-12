@@ -23,4 +23,4 @@ jobs:
             - ./node_modules
       - run:
           name: Test
-          command: npm test
+          command: './node_modules/.bin/jest --ci --runInBand --detectOpenHandles'
