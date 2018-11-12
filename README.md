@@ -1,4 +1,6 @@
-# movie-list-api
+# movie-list-api 
+
+[![CircleCI](https://circleci.com/gh/zsobral/movie-list-api.svg?style=svg)](https://circleci.com/gh/zsobral/movie-list-api)
 
 ## Requirements
 
