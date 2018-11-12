@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node src/server.js",
     "lint": "eslint --fix \"**/*.js\"",
-    "test": "NODE_ENV=test MONGO_URI=mongodb://mongo/movieListTest jest --colors --watchAll --runInBand",
+    "test": "jest --colors --watchAll --runInBand",
     "prettier": "prettier --write \"**/*.js\""
   },
   "repository": {
