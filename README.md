@@ -1,12 +1,17 @@
 # movie-list-api 
 
-[![CircleCI](https://circleci.com/gh/zsobral/movie-list-api.svg?style=svg)](https://circleci.com/gh/zsobral/movie-list-api)
+[![CircleCI](https://circleci.com/gh/zsobral/movie-list-api.svg?style=shield)](https://circleci.com/gh/zsobral/movie-list-api)
+[![GitHub license](https://img.shields.io/github/license/zsobral/movie-list-api.svg)](https://github.com/zsobral/movie-list-api/blob/master/LICENSE)
+
+
 
 ## Requirements
 
 * Docker
 * Docker Compose
-* TheMovieDB API key ([follow this instructions](https://developers.themoviedb.org/3/getting-started/introduction))
+* [TMDb](https://www.themoviedb.org/) API key
+
+## Run
 
 ```bash
 # start server
@@ -16,5 +21,5 @@ docker-compose up
 docker-compose stop
 
 # run tests
-docker-compose exec api npm run test
+docker-compose exec api npm test
 ```
