@@ -12,6 +12,8 @@ jobs:
       - run:
           name: Update npm
           command: 'sudo npm install -g npm@latest'
+      - run:
+          command: 'sudo npm install surge@latest apidoc@latest surge@latest'
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
@@ -24,3 +26,9 @@ jobs:
       - run:
           name: Test
           command: 'npm test -- --ci --forceExit'
+      - run:
+          name: Generate docs
+          command: apidoc -i src/ -o docs/
+      - run:
+          name: Publish docs
+          command: surge --project ~/movie-list/docs --domain https://movie-list-api.surge.sh
