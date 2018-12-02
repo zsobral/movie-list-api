@@ -9,7 +9,7 @@ services:
         - NODE_ENV=development
     command: nodemon src/server.js
     ports:
-      - "3000:3000"
+      - "80:3000"
     restart: always
     env_file:
       - .env.local
