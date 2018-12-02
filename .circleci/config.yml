@@ -13,7 +13,7 @@ jobs:
           name: Update npm
           command: 'sudo npm install -g npm@latest'
       - run:
-          command: 'sudo npm install -g surge@latest apidoc@latest surge@latest'
+          command: 'sudo npm install -g surge@latest apidoc@latest'
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
