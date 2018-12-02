@@ -8,7 +8,7 @@ const app = require('../src/app');
 describe('database disconnected', () => {
   it('should response with status 500', async () => {
     await request(app)
-      .get('/api/users')
+      .get('/users')
       .expect(500);
   }, 30000);
 });
@@ -17,7 +17,7 @@ describe('database connected', () => {
   it('should response with status 200', async () => {
     await db.connect();
     await request(app)
-      .get('/api/users')
+      .get('/users')
       .expect(200);
   }, 30000);
 });

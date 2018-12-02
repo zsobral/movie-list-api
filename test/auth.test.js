@@ -30,7 +30,7 @@ describe('POST /auth/email', () => {
   describe('valid user login', () => {
     it('should response with a signed cookie', async () => {
       const response = await request(app)
-        .post('/api/auth/email')
+        .post('/auth/email')
         .send({
           email: user.email,
           password: user.password
@@ -52,7 +52,7 @@ describe('POST /auth/email', () => {
   describe('invalid user email format', () => {
     it('should response with validation error', async () => {
       const response = await request(app)
-        .post('/api/auth/email')
+        .post('/auth/email')
         .send({
           email: 'randomemail',
           password: user.password
@@ -65,7 +65,7 @@ describe('POST /auth/email', () => {
 
   describe('empty body', () => {
     it('should response with validation error', async () => {
-      const response = await request(app).post('/api/auth/email');
+      const response = await request(app).post('/auth/email');
 
       expect(response.body.error.code).toBe('VALIDATION_ERR');
       expect(response.status).toBe(400);
@@ -75,7 +75,7 @@ describe('POST /auth/email', () => {
   describe('invalid password', () => {
     it('should response with validation error', async () => {
       const response = await request(app)
-        .post('/api/auth/email')
+        .post('/auth/email')
         .send({
           email: user.email,
           password: '1234567890'
@@ -90,7 +90,7 @@ describe('POST /auth/email', () => {
 describe('DELETE /logout', () => {
   it('should remove the token', async () => {
     const response = await request(app)
-      .delete('/api/logout')
+      .delete('/logout')
       .set('Cookie', cookies);
 
     expect(await Token.count()).toBe(0);

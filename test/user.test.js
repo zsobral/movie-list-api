@@ -26,7 +26,7 @@ afterAll(async () => {
 describe('GET /users', () => {
   it('should respond with all users', async () => {
     const response = await request(app)
-      .get('/api/users')
+      .get('/users')
       .expect(200);
     expect(response.body.length).toBe(1);
   });
@@ -35,13 +35,13 @@ describe('GET /users', () => {
 describe('GET /users/:id', () => {
   it('should response with status 404', async () => {
     await request(app)
-      .get('/api/users/123456789012123456789012')
+      .get('/users/123456789012123456789012')
       .expect(404);
   });
 
   it('should response with status 400', async () => {
     await request(app)
-      .get('/api/users/123')
+      .get('/users/123')
       .expect(400);
   });
 });

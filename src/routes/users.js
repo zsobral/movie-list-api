@@ -16,7 +16,7 @@ const router = express.Router();
  * @apiGroup User
  * 
  * @apiExample Example usage:
- * curl -i http://localhost/api/users
+ * curl -i http://localhost/users
  * 
  * @apiSuccess {Object[]} response
  * @apiSuccess {String} response.id user id

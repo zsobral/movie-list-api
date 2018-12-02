@@ -19,7 +19,7 @@ beforeAll(async () => {
   const newUser = await new User(user).save();
   user.id = newUser.id;
   const response = await request(app)
-    .post('/api/auth/email')
+    .post('/auth/email')
     .send({ email: user.email, password: user.password });
   cookies = response.header['set-cookie'];
 });
@@ -33,7 +33,7 @@ describe('GET /tmdb/movies', () => {
   describe('missing token cookie', () => {
     it('should response with unauthorized error', async () => {
       const response = await request(app)
-        .get('/api/tmdb/movies')
+        .get('/tmdb/movies')
         .query({ query: 'nemo' });
       expect(response.body.error.code).toBe('UNAUTHORIZED_ERR');
     });
@@ -42,7 +42,7 @@ describe('GET /tmdb/movies', () => {
   describe('missing query', () => {
     it('should return a validation error', async () => {
       const response = await request(app)
-        .get('/api/tmdb/movies')
+        .get('/tmdb/movies')
         .set('Cookie', cookies);
       expect(response.body.error.code).toBe('VALIDATION_ERR');
     });
@@ -51,7 +51,7 @@ describe('GET /tmdb/movies', () => {
   describe('with query', () => {
     it('should return an array', async () => {
       const response = await request(app)
-        .get('/api/tmdb/movies')
+        .get('/tmdb/movies')
         .query({ query: 'nemo' })
         .set('Cookie', cookies);
       expect(response.body.length).toBeGreaterThan(0);
@@ -62,7 +62,7 @@ describe('GET /tmdb/movies', () => {
 describe('GET /tmdb/movies/:id', () => {
   describe('missing token cookie', async () => {
     it('should response with unauthorized error', async () => {
-      const response = await request(app).get('/api/tmdb/movies/808');
+      const response = await request(app).get('/tmdb/movies/808');
       expect(response.body.error.code).toBe('UNAUTHORIZED_ERR');
     });
   });
@@ -70,14 +70,14 @@ describe('GET /tmdb/movies/:id', () => {
   it('should return an object', async () => {
     const movieId = 808;
     const response = await request(app)
-      .get(`/api/tmdb/movies/${movieId}`)
+      .get(`/tmdb/movies/${movieId}`)
       .set('Cookie', cookies);
     expect(response.body.id).toBe(movieId);
   });
 
   it('should return an array of length 0', async () => {
     const response = await request(app)
-      .get('/api/tmdb/movies/9999999999999')
+      .get('/tmdb/movies/9999999999999')
       .set('Cookie', cookies);
     expect(response.body.error.code).toBe('ERR');
   });
