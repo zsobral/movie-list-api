@@ -10,6 +10,31 @@ const User = require('../models/user');
 
 const router = express.Router();
 
+/**
+ * @api {get} /users Request all users
+ * @apiName GetUsers
+ * @apiGroup User
+ * 
+ * @apiExample Example usage:
+ * curl -i http://localhost/api/users
+ * 
+ * @apiSuccess {Object[]} response
+ * @apiSuccess {String} response.id user id
+ * @apiSuccess {String} response.name user name
+ * @apiSuccess {String} response.email user email
+ * @apiSuccess {Number} response.created_at user register date (unix timestamp)
+ * 
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     [
+ *       {
+ *         "name": "juninho",
+ *         "email": "juninho2@gmail.com",
+ *         "created_at": 1543772595,
+ *         "id": "5c0419b3ab9024001389abf3"
+ *       }
+ *     ]
+ */
 router.get('/users', async (req, res, next) => {
   try {
     const users = await User.find({});
