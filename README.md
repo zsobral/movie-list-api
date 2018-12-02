@@ -11,6 +11,10 @@
 * Docker Compose
 * [TMDb](https://www.themoviedb.org/) API key
 
+## Docs
+
+https://movie-list-api.surge.sh/
+
 ## Run
 
 ```bash
