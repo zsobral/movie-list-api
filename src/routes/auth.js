@@ -11,6 +11,14 @@ const error = require('../utils/error');
 const User = require('../models/user');
 const Token = require('../models/token');
 
+/**
+ * @api {post} /auth/email User login
+ * @apiName AuthEmail
+ * @apiGroup Auth
+ * 
+ * @apiParam {String} email Email of the User
+ * @apiParam {String} password Password of the User
+ */
 router.post(
   '/auth/email',
   validator({

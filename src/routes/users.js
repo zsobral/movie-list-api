@@ -11,29 +11,15 @@ const User = require('../models/user');
 const router = express.Router();
 
 /**
- * @api {get} /users Request all users
+ * @api {get} /users Read data of all Users
  * @apiName GetUsers
  * @apiGroup User
  * 
- * @apiExample Example usage:
- * curl -i http://localhost/users
- * 
- * @apiSuccess {Object[]} response
- * @apiSuccess {String} response.id user id
- * @apiSuccess {String} response.name user name
- * @apiSuccess {String} response.email user email
- * @apiSuccess {Number} response.created_at user register date (unix timestamp)
- * 
- * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- *     [
- *       {
- *         "name": "juninho",
- *         "email": "juninho2@gmail.com",
- *         "created_at": 1543772595,
- *         "id": "5c0419b3ab9024001389abf3"
- *       }
- *     ]
+ * @apiSuccess {Object[]} users
+ * @apiSuccess {String} users.id Id of the User
+ * @apiSuccess {String} users.name Name of the User
+ * @apiSuccess {String} users.email Email of the User
+ * @apiSuccess {Number} users.created_at Date when the User was created (Unix Timestamp)
  */
 router.get('/users', async (req, res, next) => {
   try {
@@ -44,10 +30,30 @@ router.get('/users', async (req, res, next) => {
   }
 });
 
+/**
+ * @api {get} /users/me Read data of authenticated User
+ * @apiName GetAuthenticatedUser
+ * @apiGroup User
+ * 
+ * @apiSuccess {String} id Id of the User
+ * @apiSuccess {String} name Name of the User
+ * @apiSuccess {String} email Email of the User
+ * @apiSuccess {Number} created_at Date when the User was created (Unix Timestamp)
+ */
 router.get('/users/me', requireAuthentication, (req, res, next) => {
   res.json(req.user);
 });
 
+/**
+ * @api {get} /users/:id Read data of a User
+ * @apiName GetUserById
+ * @apiGroup User
+ * 
+ * @apiSuccess {String} id Id of the User
+ * @apiSuccess {String} name Name of the User
+ * @apiSuccess {String} email Email of the User
+ * @apiSuccess {Number} created_at Date when the User was created (Unix Timestamp)
+ */
 router.get(
   '/users/:id',
   validator({
@@ -71,6 +77,20 @@ router.get(
   }
 );
 
+/**
+ * @api {post} /users Create a new User
+ * @apiName CreateUser
+ * @apiGroup User
+ * 
+ * @apiParam {String} name Name of the User
+ * @apiParam {String} email Email of the User
+ * @apiParam {String} password Password of the User to login
+ * 
+ * @apiSuccess {String} id Id of the User
+ * @apiSuccess {String} name Name of the User
+ * @apiSuccess {String} email Email of the User
+ * @apiSuccess {Number} created_at Date when the User was created (Unix Timestamp)
+ */
 router.post(
   '/users',
   validator({
