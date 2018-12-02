@@ -15,12 +15,12 @@ jobs:
       - run:
           command: 'sudo npm install surge@latest apidoc@latest surge@latest'
       - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-v1-{{ checksum "package.json" }}
       - run:
           name: Install modules
           command: npm install
       - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-v1-{{ checksum "package.json" }}
           paths:
             - ./node_modules
       - run:
