@@ -31,7 +31,7 @@ if (process.env.NODE_ENV === 'development' && process.env.MORGAN) {
 
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.json());
-app.use('/api', routes);
+app.use(routes);
 
 app.use('*', (req, res, next) => {
   next(new error.NotFoundError('api endpoint not found'));
