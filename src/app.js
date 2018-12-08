@@ -7,7 +7,6 @@ const routes = require('./routes');
 const error = require('./utils/error');
 
 const app = express();
-
 if (process.env.NODE_ENV === 'test') {
   console.log = () => {};
 }

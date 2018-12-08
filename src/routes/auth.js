@@ -44,7 +44,8 @@ router.post(
         throw new error.UnauthorizedError('invalid email');
       }
 
-      if (user.password !== req.validator.body.password) {
+      const match = await user.comparePassword(req.validator.body.password)
+      if (!match) {
         throw new error.UnauthorizedError('invalid password');
       }
 

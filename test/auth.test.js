@@ -78,7 +78,7 @@ describe('POST /auth/email', () => {
         .post('/auth/email')
         .send({
           email: user.email,
-          password: '1234567890'
+          password: 'wrongpassword'
         });
 
       expect(response.body.error.code).toBe('UNAUTHORIZED_ERR');

@@ -7,8 +7,14 @@ ENV PORT $PORT
 
 WORKDIR /opt
 
+RUN apk --no-cache add --virtual builds-deps \
+    build-base \
+    python
 COPY package.json package-lock.json ./
-RUN npm install && npm cache clean --force
+RUN npm install && \
+    npm cache clean --force && \
+    npm rebuild bcrypt --build-from-source && \
+    apk del builds-deps
 ENV PATH /opt/node_modules/.bin:$PATH
 
 WORKDIR /opt/app
