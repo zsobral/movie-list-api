@@ -8,7 +8,7 @@ const app = require('./app');
 const server = http.createServer(app);
 
 db.connect();
-server.listen(3000);
+server.listen(process.env.PORT);
 
 process.on('SIGINT', shutdown);
 
