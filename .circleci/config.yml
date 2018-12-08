@@ -34,7 +34,7 @@ jobs:
           command: surge --project ~/movie-list/docs --domain https://movie-list-api.surge.sh
   deploy:
     docker:
-      - image: buildpack-deps:trusty
+      - image: circleci/buildpack-deps
     steps:
       - checkout
       - run:
